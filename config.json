@@ -1,0 +1,7 @@
+{
+    "baseApi": "http://localhost:7000",
+    "storeApi" : "/v1/Analysis/StoreResult",
+    "checkForFilesApi" : "/v1/Analysis/Audio/ToProcess",
+    "bucket_name" : "stt-voicefile",
+    "google_creds" : "C:\\Users\\imkar\\Documents\\voiceofcustomer-329717-138550b1431b.json"
+}

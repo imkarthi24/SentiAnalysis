@@ -8,18 +8,18 @@ import pandas as pd
 class SentimentAnalyzer:
     def __init__(self):
         modelFilePath = os.path.join(os.getcwd(), 'sentiment_model.h5')
-        tweetPath = os.path.join(os.getcwd(), 'Dataset.csv')
-        df = pd.read_csv(tweetPath)
+        datasetPath = os.path.join(os.getcwd(), 'IMDBDataset.csv')
+        df = pd.read_csv(datasetPath)
 
-        tweet_df = df[['text', 'airline_sentiment']]
-        self.sentiment_label = tweet_df.airline_sentiment.factorize()
+        reviewDf = df[['review', 'sentiment']]
+        self.sentiment_label = reviewDf.sentiment.factorize()
 
-        tweet = tweet_df.text.values
+        review = reviewDf.review.values
 
         self.tokenizer = Tokenizer(num_words=5000)
-        self.tokenizer.fit_on_texts(tweet)
+        self.tokenizer.fit_on_texts(review)
         vocab_size = len(self.tokenizer.word_index) + 1
-        encoded_docs = self.tokenizer.texts_to_sequences(tweet)
+        encoded_docs = self.tokenizer.texts_to_sequences(review)
         padded_sequence = pad_sequences(encoded_docs, maxlen=200)
 
         self.model = tensorflow.keras.models.load_model(modelFilePath)
